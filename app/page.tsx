@@ -5,6 +5,8 @@ import YearComparator from "./components/YearComparator";
 import MembershipSummary from "./components/MembershipSummary";
 import CountryRanking from "./components/CountryRanking";
 import { JcrStickyFilters, MaiteiStickyFilters } from "./components/StickyFilterBars";
+import HFPowerBiPanel from "./components/HFPowerBiPanel";
+import ResumenComparadoPanel from "./components/ResumenComparadoPanel";
 
 const HF_PATH = "/api/daily-metrics.csv";
 const MEMBERSHIP_PATH = "/data/jcr_membership.xlsx";
@@ -147,6 +149,12 @@ export default function Page() {
           />
         </div>
 
+        {/* Resumen Ejecutivo Comparado: los 3 hoteles de Panatel lado a lado */}
+        <ResumenComparadoPanel hotelFilter={jcrHotel} />
+
+        {/* Panel estilo Power BI real (gauges + combo chart), datos en vivo */}
+        <HFPowerBiPanel hotelFilter={jcrHotel} />
+
         {/* H&F + rankings dentro del YearComparator */}
         <YearComparator
           filePath={HF_PATH}
@@ -203,6 +211,10 @@ export default function Page() {
             onMonth={setMaiMonth}
           />
         </div>
+
+        <ResumenComparadoPanel hotelFilter={"MAITEI"} />
+
+        <HFPowerBiPanel hotelFilter={"MAITEI"} />
 
         <YearComparator
           filePath={HF_PATH}
